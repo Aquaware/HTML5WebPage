@@ -6,11 +6,17 @@
 /* 全体 */
 body {margin: 0; font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-serif;}
 
-/* ヘッダー */
-.header         {padding: 20px; background-color: #eeffff;}
-.header h1      {margin: 0; font-size: 40px; line-height: 0.5; text-align: left}
-.header h1 a    {color: #000; text-decoration: none;}
-.header .logo   {margin: 0 10px 14px 0; border: none; vertical-align: -25px;}
-.header p       {margin: 0 0 -12px 10px; padding: 0; font-size: 18px; line-height: 0.5;}
+/* ヘッダー#1 */
+.header1         {padding: 12px; background-color: #eeffff;}
+.header1 .logo   {margin: 0 10px 14px 0; border: none; vertical-align: -25px;}
+.header1 h1      {margin: 0; font-size: 40px; line-height: 0.5; text-align: left}
+.header1 h1 a    {color: #000; text-decoration: none;}
+.header1 p       {text-align: center; margin: 0 0 0px 10px; padding: 0; font-size: 18px; line-height: 0.5;}
+.header1 .button {display: inline-block; padding 10px 30px 10px 30px; background-color: #ed1a7d; color: #fff; font-size: 14px; text-decoration: none;}
 
-
+/* ヘッダー#2 */
+.header2         {padding: 15px; background-color: #ffeeff;}
+.header2 .logo   {margin: 0 0 0 -10px; border: none; vertical-align: 0px;}
+.header2 h1 a    {color: #000; text-decoration: none;}
+.header2 h1      {margin: 0 0 0 0; font-size: 24px; line-height: 1.0; text-align: left}
+.header2 p       {margin: 5px 0 -5px 0; padding: 0; font-size: 18px; line-height: 1.0;}
