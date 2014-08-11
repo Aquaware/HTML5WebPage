@@ -1,0 +1,16 @@
+/* HTML5 template (BASE) by I. Kudo */
+
+@charset "UTF-8";
+@-ms-viewport	{width: device-width;}
+
+/* 全体 */
+body {margin: 0; font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-serif;}
+
+/* ヘッダー */
+.header         {padding: 15px; background-color: #eeeebb;}
+.header h1      {margin: -7px 10px 0px -2px; font-size: 32px; line-height: 1.0; text-align: left}
+.header h1 a    {color: #000; text-decoration: none;}
+.header p       {margin: 0 0 0 0; padding: 0; font-size: 18px; line-height: 1.0;}
+
+/* コンテンツ */
+.graph          {padding: 10px; margin: 15px; background-color: #f0f0f0;}
