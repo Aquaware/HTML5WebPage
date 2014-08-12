@@ -10,7 +10,14 @@ body {margin: 0; font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-s
 .header         {padding: 15px; background-color: #eeeebb;}
 .header h1      {margin: -7px 10px 0px -2px; font-size: 32px; line-height: 1.0; text-align: left}
 .header h1 a    {color: #000; text-decoration: none;}
-.header p       {margin: 0 0 0 0; padding: 0; font-size: 18px; line-height: 1.0;}
+.header h2      {margin: 0 0 0 0; padding: 0; font-size: 18px; line-height: 1.0;}
 
-/* コンテンツ */
-.graph          {padding: 10px; margin: 15px; background-color: #f0f0f0;}
+
+/* svg */
+.circle         { fill: red; stroke: brown; stroke-width: 3;}
+
+/* 数字 */
+span.figure     {margin-left: 5px;}
+
+/* 棒グラフ */
+div.bar         {display: inline-block; margin-left: 2px; width: 20px; height: 10px; background-color: teal;}
