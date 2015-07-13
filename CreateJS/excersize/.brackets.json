@@ -1,0 +1,6 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Users/ikuo/Documents/Study/HTML5/CreateJS/excersize/external/js/easeljs/filters/Filter.js",
+        "/Users/ikuo/Documents/Study/HTML5/CreateJS/excersize/external/js/soundjs/webaudio/WebAudioSoundInstance.js"
+    ]
+}

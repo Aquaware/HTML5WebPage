@@ -1,0 +1,64 @@
+<!-- HTML5 by I. Kudo -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>タイトル</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen"/>
+    
+<!-- jQuery --> 
+<script type="text/JavaScript" src="./external/js/jquery-1.7.1.min.js"></script> 
+<script type="text/JavaScript" src="./external/js/jquery-ui-1.8.18.custom.min.js"></script>    
+    
+<script>
+    var createjs = window;
+</script> 
+   
+    
+<script type="text/JavaScript" src="./external/js/easeljs/easeljs-0.8.0.min.js"></script>
+<script type="text/JavaScript" src="./external/js/tweenjs/tweenjs-0.6.0.min.js"></script>
+<script type="text/JavaScript" src="./external/js/preloadjs/preloadjs-0.6.0.min.js"></script>
+    
+<!--
+<script src="https://code.createjs.com/createjs-2014.12.12.min.js"></script>
+-->    
+
+<script type="text/JavaScript" src="./js/classesForCreateJS.js"></script>
+<script type="text/JavaScript" src="./js/main.js"></script>
+
+</head>
+    
+<body onload="init()">
+
+<!-- ヘッダー#1 -->
+<div class="header">
+    <h1><a href="#"><img src="./images/site_logo.png" alt="" class="logo"/>タイトル</a></h1>
+</div>
+
+<div id="content">
+    <h1 id="title">Drag and drop a resource folder</h1>
+    <form class="dropzone" id="dropHere" 
+          ondragover="enableDrop(event)"
+          ondrop="didFileDropped(event)">
+    </form>
+        
+    <div id="op"></div>
+</div>
+ 
+<div id = "root">
+    
+    <div id="shadow" class="drop-shadow raised"></div>
+    <div id="container"></div>
+    
+    <canvas id="layer0" width="400" height="500"></canvas>
+    <canvas id="layer1" width="400" height="500"></canvas>
+    <canvas id="layer2" width="400" height="500"></canvas>
+    <canvas id="layer3" width="400" height="500"></canvas>
+    <canvas id="layer4" width="400" height="500"></canvas>
+</div>
+    
+</body>
+</html>

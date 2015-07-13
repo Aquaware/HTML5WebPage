@@ -23,17 +23,60 @@ body {margin: 0; font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-s
 
 /* ヘッダー#3 */
 .header3         {padding: 15px; background-color: #eeeeff;}
-.header3 .logo   {margin: 0 0 0 0; border: none; vertical-align: -40px;}
+.header3 .sns    {float: right;}
+.header3 .logo   {float: left; margin: 0 0 0 0; border: none; vertical-align: -40px;}
+.header3 .header-main: after  {content:""; display: block; clear: both;}
 .header3 .header_title {padding: 0 0 0 12px; margin: 0 0 0 0; vertical-align: middle;}
 .header3 h1      {margin: 0 0 0 0; font-size: 40px; line-height: 1.0; text-align: left}
 .header3 h1 a    {color: #000; text-decoration: none;}
-.header3 p       {margin: 5px 0 -5px 0; padding: 0; font-size: 18px; line-height: 1.0;}
+.header3 h2       {margin: 20px 5px 60px 5px; padding: 1px 2px 3px 4px; font-size: 18px; line-height: 1.0;}
 
 /* ヘッダー#4 */
 .header4         {padding: 15px; background-color: #eeeebb;}
 .header4 .logo   {float: left; margin: -4px 10px 0 0; border: none; vertical-align: 0;}
-.header4:after   {content: ""; display: block; clear: both; }
+.header4: after   {content: ""; display: block; clear: both; }
 .header4         {*zoom: 1;}
 .header4 h1      {margin: -7px 10px 0px -2px; font-size: 32px; line-height: 1.0; text-align: left}
 .header4 h1 a    {color: #000; text-decoration: none;}
 .header4 p       {margin: 0 0 0 0; padding: 0; font-size: 18px; line-height: 1.0;}
+
+/* ヘッダー#5 */
+.header5	     {padding: 20px; background-color: #dfe3e8;}
+.header5 h1	     {margin: 4px 0 0 0; font-size: 20px; line-height: 1;}
+.header5 h1 a    {color: #000; text-decoration: none;}
+.header5 p	     {margin: 8px 0 0 0; font-size: 12px; line-height: 1;}
+.header5 .logo	 {float: left; border: none; margin: -4px 10px 0 0;}
+.header5: after	 {content: ""; display: block; clear: both;}
+.header5	     {*zoom: 1;}
+.button_r	     {display: inline-block; padding: 10px 30px 10px 30px; background-color: #ed1a7d; color: #fff;
+                    font-size: 14px; text-decoration: none;}
+.button_r:hover, 
+.button_r:focus	 {outline: none; background-color: #ff9bca;}
+.button_r	     {display: block; height: 100px; width: 100px; margin: 0 auto 0 auto; padding: 40px 0 0 0; border-radius: 50px;
+                    text-align: center; -moz-box-sizing: border-box;-webkit-box-sizing: border-box; box-sizing: border-box;}
+.header5	     {position: relative;}
+.header5 .button_r	{position: absolute; bottom: -40px; right: 30px;}
+
+/* ヘッダー#6 */
+.header6         {padding: 15px; background-color: #222222;}
+.header6 .logo   {float: left; margin: -4px 10px 0 0; border: none; vertical-align: 0;}
+.header6: after   {content: ""; display: block; clear: both; }
+.header6         {*zoom: 1;}
+.header6 h1      {margin: 0 10px 10px 0; font-size: 32px; line-height: 1.0; text-align: left}
+.header6 h1 a    {color: #ffffff; text-decoration: none;}
+.header6 p       {color: #ffffff; margin: 0 0 0 0; padding: 0; font-size: 18px; line-height: 1.0;}
+.header6 .photo  {max-width: 100%; height: auto; margin: 15px 0 0 0; vertical-align: bottom;}
+
+/* ヘッダー#7 */
+.header7         {padding: 15px; background-color: #bbaaaa;
+                    height: 280px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;
+                    background-image: url(../images/header_photo.jpg); 
+                    background-position: 68% 63%;
+                    background-size: cover; }
+
+.header7 .logo   {float: left; margin: -4px 10px 0 0; border: none; vertical-align: 0;}
+.header7: after   {content: ""; display: block; clear: both; }
+.header7         {*zoom: 1;}
+.header7 h1      {margin: 0 10px 10px 0; font-size: 32px; line-height: 1.0; text-align: left}
+.header7 h1 a    {color: #ffffff; text-decoration: none;}
+.header7 p       {color: #ffffff; margin: 0 0 0 0; padding: 0; font-size: 18px; line-height: 1.0;}
