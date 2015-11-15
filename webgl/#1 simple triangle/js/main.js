@@ -4,7 +4,7 @@ var fragmentShader;
 var gl;
 var program;
 
-var verticies = [
+var vertices = [
      0.0,  1.0,  0.0,
      1.0,  0.0,  0.0,
     -1.0,  0.0,  0.0
@@ -16,7 +16,7 @@ function init() {
     setupShaders();
 
     // VBOの生成、バインド
-    var vbo = createVbo(verticies);
+    var vbo = createVbo(vertices);
 
     // attribute
     var dataStride = 3;
@@ -25,7 +25,7 @@ function init() {
     gl.vertexAttribPointer(attLocation, dataStride, gl.FLOAT, false, 0, 0);
 
     // 描画
-    gl.drawArrays(gl.TRIANGLES, 0, verticies.length / dataStride);
+    gl.drawArrays(gl.TRIANGLES, 0, vertices.length / dataStride);
     gl.flush();
 }
 
