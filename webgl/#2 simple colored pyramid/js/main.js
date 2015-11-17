@@ -9,10 +9,10 @@ var projectionMatrix;
 var rotationAxis;
 
 var vertices = [
-  0.0, 1.0, 0.0,   -1.0, 0.0, 0.0,   0.0, 0.0, 1.0,
-  0.0, 1.0, 0.0,    0.0, 0.0, 1.0,   1.0, 0.0, 0.0,
-  0.0, 1.0, 0.0,    1.0, 0.0, 0.0,   0.0, 0.0, -1.0,
-  0.0, 1.0, 0.0,    0.0, 0.0, -1.0, -1.0, 0.0, 0.0
+  0.0, 1.0, 0.0,  -1.0, 0.0, 0.0,   0.0, 0.0, 1.0,
+  0.0, 1.0, 0.0,   0.0, 0.0, 1.0,   1.0, 0.0, 0.0,
+  0.0, 1.0, 0.0,   1.0, 0.0, 0.0,   0.0, 0.0, -1.0,
+  0.0, 1.0, 0.0,   0.0, 0.0, -1.0, -1.0, 0.0, 0.0
 ];
 
 var colors = [
@@ -21,6 +21,7 @@ var colors = [
   [0.0, 1.0, 0.0, 1.0], // back  (green)
   [1.0, 0.0, 0.0, 1.0], // left  (red)
 ];
+
 
 function init() {
   initCanvas();
@@ -94,6 +95,7 @@ function createProgram(vertexShader, fragmentShader){
     gl.attachShader(prog, fragmentShader);
     gl.linkProgram(prog);
     if(gl.getProgramParameter(prog, gl.LINK_STATUS)){
+        gl.useProgram(prog);
         return prog;
     }else{
         alert(gl.getProgramInfoLog(prog));
@@ -114,12 +116,12 @@ function createCBO(data){
    var cbo = gl.createBuffer();
    gl.bindBuffer(gl.ARRAY_BUFFER, cbo);
    var unpackedColors = [];
-   data.forEach(function(color) {
-     [0, 1].forEach(function() {
-       unpackedColors = unpackedColors.concat(color);
-     });
-     unpackedColors = unpackedColors.concat([1.0, 1.0, 1.0, 1.0]);
-   });
+   for (var i in data) {
+       var color = data[i];
+       for (var j=0; j < 4; j++) {
+           unpackedColors = unpackedColors.concat(color);
+       }
+   }
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(unpackedColors), gl.STATIC_DRAW);
    return cbo;
 }
@@ -128,6 +130,7 @@ function createIBO(data){
   var ibo = gl.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(data), gl.STATIC_DRAW);
+  return ibo;
 }
 
 function draw() {
@@ -148,7 +151,10 @@ function draw() {
   gl.uniformMatrix4fv(shaderParameters.uModelView , false, modelViewMatrix);
 
   // 描画
-  gl.drawArrays(gl.TRIANGLES, 0, 12 /* num of vertex */);
+  gl.drawArrays(gl.TRIANGLES, 0, vertices.length / 3);
+  //gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, IBO);
+  //gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+
 }
 
 var lastTime = null;
