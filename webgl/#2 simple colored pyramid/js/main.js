@@ -138,8 +138,6 @@ function draw() {
   gl.enable(gl.DEPTH_TEST);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  gl.useProgram(shaderProgram);
-
   // 頂点属性の位置情報の設定
   gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
   gl.vertexAttribPointer(shaderParameters.aPosition, 3, gl.FLOAT, false, 0, 0);

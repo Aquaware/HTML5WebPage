@@ -67,32 +67,34 @@ var colors = [
 ];
 
 function init() {
-    initGL();
-    initShaders()
-    VBO = createVBO(vertices);
-    CBO = createCBO(colors);
-    IBO = createIBO(vertexIndices);
+  initGL();
+  initShaders();
+  initMatrix();
 
-    modelViewMatrix = mat4.create();
-    projectionMatrix = mat4.create();
+  VBO = createVBO(vertices);
+  CBO = createCBO(colors);
+  IBO = createIBO(vertexIndices);
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.enable(gl.DEPTH_TEST);
+  var angle = 5;
+  mat4.rotate(modelViewMatrix, degToRad(angle), [1, 1, 1]);
 
-    tick();
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.enable(gl.DEPTH_TEST);
+
+  tick();
 }
 
 function initGL(){
-    canvas = document.getElementById("myCanvas");
+  canvas = document.getElementById("myCanvas");
 
-  	// WebGLコンテキストが取得できたかどうか調べる
-  	gl = canvas.getContext('webgl');
-  	if(!gl){
-  		alert('webgl not supported!');
-  		return;
-  	}
-    gl.viewportWidth = canvas.width;
-    gl.viewportHeight = canvas.height;
+  // WebGLコンテキストが取得できたかどうか調べる
+  gl = canvas.getContext('webgl');
+  if(!gl){
+  	alert('webgl not supported!');
+  	return;
+  }
+  gl.viewportWidth = canvas.width;
+  gl.viewportHeight = canvas.height;
 }
 
 function initShaders() {
@@ -102,78 +104,78 @@ function initShaders() {
   fragmentShader = createShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
 
   shaderProgram = createProgram(vertexShader, fragmentShader);
-    shaderParameters.aPosition = gl.getAttribLocation(shaderProgram, "aPosition");
-    gl.enableVertexAttribArray(shaderParameters.aPosition);
+  shaderParameters.aPosition = gl.getAttribLocation(shaderProgram, "aPosition");
+  gl.enableVertexAttribArray(shaderParameters.aPosition);
 
-    shaderParameters.aColor = gl.getAttribLocation(shaderProgram, "aColor");
-    gl.enableVertexAttribArray(shaderParameters.aColor);
+  shaderParameters.aColor = gl.getAttribLocation(shaderProgram, "aColor");
+  gl.enableVertexAttribArray(shaderParameters.aColor);
 
-    shaderParameters.uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
-    shaderParameters.uModelView = gl.getUniformLocation(shaderProgram, "uModelView");
+  shaderParameters.uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
+  shaderParameters.uModelView = gl.getUniformLocation(shaderProgram, "uModelView");
+}
+
+function initMatrix() {
+  // マトリクス
+  modelViewMatrix = mat4.create();
+  projectionMatrix = mat4.create();
+  mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, projectionMatrix);
+  mat4.identity(modelViewMatrix);
+  mat4.translate(modelViewMatrix, [-1.5, 0.0, -8.0]);
+  mat4.translate(modelViewMatrix, [3.0, 0.0, 0.0]);
 }
 
 function createProgram(vertexShader, fragmentShader){
-    var prog = gl.createProgram();
-    gl.attachShader(prog, vertexShader);
-    gl.attachShader(prog, fragmentShader);
-    gl.linkProgram(prog);
-    if(gl.getProgramParameter(prog, gl.LINK_STATUS)){
-      gl.useProgram(prog);
-        return prog;
-    }else{
-        alert(gl.getProgramInfoLog(prog));
-        return null;
-    }
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vertexShader);
+  gl.attachShader(prog, fragmentShader);
+  gl.linkProgram(prog);
+  if(gl.getProgramParameter(prog, gl.LINK_STATUS)){
+    gl.useProgram(prog);
+    return prog;
+  }else{
+    alert(gl.getProgramInfoLog(prog));
+    return null;
+  }
 }
 
 function createShader(source, type){
-    var shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if(gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
-        return shader;
-    }else{
-        alert(gl.getShaderInfoLog(shader));
-        return null;
-    }
+  var shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if(gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+      return shader;
+  }else{
+      alert(gl.getShaderInfoLog(shader));
+      return null;
+  }
 }
 
 function degToRad(degrees) {
-    return degrees * Math.PI / 180;
+  return degrees * Math.PI / 180;
 }
 
 function draw() {
-    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, projectionMatrix);
+  gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
+  gl.vertexAttribPointer(shaderParameters.aPosition, 3, gl.FLOAT, false, 0, 0);
 
-    mat4.identity(modelViewMatrix);
+  gl.bindBuffer(gl.ARRAY_BUFFER, CBO);
+  gl.vertexAttribPointer(shaderParameters.aColor, 4, gl.FLOAT, false, 0, 0);
 
-    mat4.translate(modelViewMatrix, [-1.5, 0.0, -8.0]);
-
-    mat4.translate(modelViewMatrix, [3.0, 0.0, 0.0]);
-
-    mat4.rotate(modelViewMatrix, degToRad(angle), [1, 1, 1]);
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
-    gl.vertexAttribPointer(shaderParameters.aPosition, 3, gl.FLOAT, false, 0, 0);
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, CBO);
-    gl.vertexAttribPointer(shaderParameters.aColor, 4, gl.FLOAT, false, 0, 0);
-
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, IBO);
-    gl.uniformMatrix4fv(shaderParameters.uProjection, false, projectionMatrix);
-    gl.uniformMatrix4fv(shaderParameters.uModelView, false, modelViewMatrix);
-    gl.drawElements(gl.TRIANGLES, vertexIndices.length, gl.UNSIGNED_SHORT, 0);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, IBO);
+  gl.uniformMatrix4fv(shaderParameters.uProjection, false, projectionMatrix);
+  gl.uniformMatrix4fv(shaderParameters.uModelView, false, modelViewMatrix);
+  gl.drawElements(gl.TRIANGLES, vertexIndices.length, gl.UNSIGNED_SHORT, 0);
 }
 
 // 頂点バッファ
 function createVBO(data){
-   var vbo = gl.createBuffer();
-   gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
-   return vbo;
+  var vbo = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+  return vbo;
 }
 
 // カラーバッファ
@@ -203,7 +205,8 @@ function update() {
     var timeNow = new Date().getTime();
     if (lastTime != 0) {
         var elapsed = timeNow - lastTime;
-        angle -= (75 * elapsed) / 1000.0;
+        angle -=  elapsed/ 1000000000.0;
+        mat4.rotate(modelViewMatrix, degToRad(angle), [1, 1, 1]);
     }
     lastTime = timeNow;
 }
