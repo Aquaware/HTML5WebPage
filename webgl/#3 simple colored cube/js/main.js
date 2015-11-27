@@ -81,7 +81,8 @@ function init() {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
 
-  tick();
+  //tick();
+  requestAnimationFrame(update);
 }
 
 function initGL(){
@@ -200,19 +201,14 @@ function createIBO(data){
   return ibo;
 }
 
-var lastTime = 0;
-function update() {
-    var timeNow = new Date().getTime();
-    if (lastTime != 0) {
-        var elapsed = timeNow - lastTime;
-        angle -=  elapsed/ 1000000000.0;
-        mat4.rotate(modelViewMatrix, degToRad(angle), [1, 1, 1]);
-    }
-    lastTime = timeNow;
-}
+var lastTime = null;
+function update(time) {
+  requestAnimationFrame(update);
+  var elapsedTime = lastTime ? time - lastTime : 0;
+  lastTime = time;
 
-function tick() {
-    requestAnimFrame(tick);
-    draw();
-    update();
+  // 回転
+  angle -= Math.PI * elapsedTime / 1000000;
+  mat4.rotate(modelViewMatrix,degToRad(angle), [1, 1, 1]);
+  draw();
 }
