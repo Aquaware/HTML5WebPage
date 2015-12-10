@@ -1,0 +1,60 @@
+<!-- HTML5 by I. Kudo -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>WebGL simple sample</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen"/>
+
+<!-- jQuery -->
+<script type="text/JavaScript" src="./external/js/jquery-1.7.1.min.js"></script>
+<script type="text/JavaScript" src="./external/js/jquery-ui-1.8.18.custom.min.js"></script>
+<script type="text/JavaScript" src="./external/js/gl-matrix.js"></script>
+<script type="text/javascript" src="./external/js/glMatrix-0.9.5.min.js"></script>
+<script type="text/javascript" src="./external/js/webgl-utils.js"></script>
+
+<!-- webGL shader!-->
+<script id="vertexShaderSourceText" type="x-shader/x-vertex">
+    attribute vec3 aPosition;
+    attribute vec4 aColor;
+    uniform mat4 uModelView;
+    uniform mat4 uProjection;
+    varying vec4 vColor;
+
+    void main(void) {
+      gl_Position =  uProjection * uModelView * vec4(aPosition, 1.0);
+      vColor = aColor;
+    }
+</script>
+<script id="fragmentShaderSourceText" type="x-shader/x-fragment">
+    precision mediump float;
+    varying vec4 vColor;
+    void main(void) {
+      gl_FragColor = vColor;
+    }
+</script>
+
+<script type="text/JavaScript" src="./js/main.js"></script>
+
+</head>
+
+<body onload="init()">
+
+<!-- ヘッダー#1 -->
+<div class="header">
+    <h1><a href="#"><img src="./images/site_logo.png" alt="" class="logo"/>タイトル</a></h1>
+</div>
+
+	<div id="content">
+	</div>
+
+<canvas id = "myCanvas" width="320" height="240"></canvas>
+
+
+
+
+</body>
+</html>
